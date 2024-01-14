@@ -1,0 +1,36 @@
+<link rel="stylesheet" type="text/css" href="image-comparison-slider.css">
+<body style="background-color: #333333">
+
+    <div style="max-width: 800px; margin: 0 auto; padding: 0 .5rem;">
+        <div class="image-spliter">
+            <div class="mover"></div>
+            <img class="img-left" id='img-left'>
+            <img class="img-right" id='img-right'>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+
+            <input type="text" id="text-left" placeholder="Enter URL for left image">
+            <input type="text" id="text-right" placeholder="Enter URL for right image">
+        </div>
+    </div>
+    <script src="image-comparison-slider.js"></script>
+
+    <script>
+        function updateURL() {
+            var leftImg = document.getElementById('text-left').value;
+            var rightImg = document.getElementById('text-right').value;
+            var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?left=' + encodeURIComponent(leftImg) + '&right=' + encodeURIComponent(rightImg);
+            window.history.pushState({path:newurl},'',newurl);
+        }
+
+        document.getElementById('text-left').addEventListener('input', function() {
+            document.getElementById('img-left').src = this.value;
+            updateURL();
+        });
+
+        document.getElementById('text-right').addEventListener('input', function() {
+            document.getElementById('img-right').src = this.value;
+            updateURL();
+        });
+    </script>
+</body>
